@@ -65,9 +65,10 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public void desactivar(Long id) {
-        Producto producto = productoRepository.findById(id).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
-        producto.setActivo(0);
+    public void cambiarEstado(Long id, Integer activo) {
+        Producto producto = productoRepository.findById(id).orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
+        
+        producto.setActivo(activo);
         productoRepository.save(producto);
     }
 

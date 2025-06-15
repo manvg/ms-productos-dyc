@@ -1,7 +1,10 @@
 package com.microservicio.ms_productos_dyc.controller;
 
 import com.microservicio.ms_productos_dyc.model.dto.ProductoDTO;
+import com.microservicio.ms_productos_dyc.model.dto.ResponseModelDTO;
 import com.microservicio.ms_productos_dyc.service.ProductoService;
+import com.microservicio.ms_productos_dyc.utilities.MensajesProducto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,28 +36,33 @@ public class ProductoController {
 
     //---------MÉTODOS POST---------//
     @PostMapping
-    public ResponseEntity<ProductoDTO> crear(@RequestBody ProductoDTO dto) {
-        ProductoDTO creado = productoService.crear(dto);
-        return ResponseEntity.ok(creado);
+    public ResponseEntity<ResponseModelDTO> crear(@RequestBody ProductoDTO dto) {
+        productoService.crear(dto);
+        return ResponseEntity.ok(new ResponseModelDTO(true, MensajesProducto.CREADO));
     }
 
     //---------MÉTODOS PUT---------//
     @PutMapping("/{id}")
-    public ResponseEntity<ProductoDTO> actualizar(@PathVariable Long id, @RequestBody ProductoDTO dto) {
-        ProductoDTO actualizado = productoService.actualizar(id, dto);
-        return ResponseEntity.ok(actualizado);
+    public ResponseEntity<ResponseModelDTO> actualizar(@PathVariable Long id, @RequestBody ProductoDTO dto) {
+        productoService.actualizar(id, dto);
+        return ResponseEntity.ok(new ResponseModelDTO(true, MensajesProducto.ACTUALIZADO));
     }
 
-    @PutMapping("/{id}/desactivar")
-    public ResponseEntity<Void> desactivar(@PathVariable Long id) {
-        productoService.desactivar(id);
-        return ResponseEntity.noContent().build();
+    @PutMapping("/{id}/cambiar-estado")
+    public ResponseEntity<ResponseModelDTO> cambiarEstado(@PathVariable Long id, @RequestParam("activo") int activo) {
+        if (activo != 0 && activo != 1) {
+            return ResponseEntity.badRequest().body(new ResponseModelDTO(false, MensajesProducto.ESTADO_INVALIDO));
+        }
+
+        productoService.cambiarEstado(id, activo);
+        String mensaje = (activo == 1) ? MensajesProducto.ACTIVADO : MensajesProducto.DESACTIVADO;
+        return ResponseEntity.ok(new ResponseModelDTO(true, mensaje));
     }
 
     //---------MÉTODOS DELETE---------//
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+    public ResponseEntity<ResponseModelDTO> eliminar(@PathVariable Long id) {
         productoService.eliminar(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(new ResponseModelDTO(true, MensajesProducto.ELIMINADO));
     }
 }

@@ -10,6 +10,6 @@ public interface ProductoService {
     ProductoDTO obtenerPorId(Long id);
     ProductoDTO crear(ProductoDTO dto);
     ProductoDTO actualizar(Long id, ProductoDTO dto);
-    void desactivar(Long id);
+    void cambiarEstado(Long id, Integer activo);
     void eliminar(Long id);
 }
