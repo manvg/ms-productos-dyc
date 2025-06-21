@@ -30,7 +30,7 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     public ProductoDTO obtenerPorId(Long id) {
-        Producto producto = productoRepository.findById(id).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        Producto producto = productoRepository.findByIdWithTipoProducto(id).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
         return ProductoMapper.toDTO(producto);
     }
 
