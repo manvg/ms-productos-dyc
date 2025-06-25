@@ -1,0 +1,17 @@
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\config\CorsConfig.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\controller\ProductoController.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\controller\TipoProductoController.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\model\dto\ProductoDTO.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\model\dto\ResponseModelDTO.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\model\dto\TipoProductoDTO.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\model\entity\Producto.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\model\entity\TipoProducto.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\MsProductosDycApplication.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\repository\ProductoRepository.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\repository\TipoProductoRepository.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\service\ProductoService.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\service\ProductoServiceImpl.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\service\TipoProductoService\TipoProductoService.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\service\TipoProductoService\TipoProductoServiceImpl.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\utilities\MensajesProducto.java
+C:\Users\gabri\Escritorio\PCLDYC\ms-productos-dyc\src\main\java\com\microservicio\ms_productos_dyc\utilities\ProductoMapper.java
