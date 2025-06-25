@@ -21,6 +21,7 @@ public class ProductoMapper {
 
         if (p.getTipoProducto() != null) {
             dto.setIdTipoProducto(p.getTipoProducto().getIdTipoProducto());
+            dto.setNombreTipoProducto(p.getTipoProducto().getNombre()); // <<--- Agrega esto
         }
 
         return dto;

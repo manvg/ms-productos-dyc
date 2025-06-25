@@ -40,4 +40,6 @@ public class ProductoDTO {
 
     @NotNull(message = "Debe indicar el tipo de producto")
     private Long idTipoProducto;
+
+    private String nombreTipoProducto;
 }
