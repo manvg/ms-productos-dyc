@@ -23,8 +23,8 @@ public class ProductoDTO {
     @NotBlank(message = "La descripción no puede estar vacía")
     private String descripcion;
 
-    @NotBlank(message = "El material no puede estar vacío")
-    private String material;
+    // @NotBlank(message = "El material no puede estar vacío")
+    // private String material;
 
     @NotBlank(message = "Las medidas no pueden estar vacías")
     private String medidas;
@@ -42,4 +42,10 @@ public class ProductoDTO {
     private Long idTipoProducto;
 
     private String nombreTipoProducto;
+
+    @NotNull(message = "Debe indicar el material") //new 30/06/25
+    private Long idMaterial;
+
+    //opt
+    private String nombreMaterial; //new 30/06/25
 }

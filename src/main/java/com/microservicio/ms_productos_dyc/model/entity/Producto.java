@@ -19,9 +19,6 @@ public class Producto {
     private String descripcion;
 
     @Column(nullable = false, length = 250)
-    private String material;
-
-    @Column(nullable = false, length = 250)
     private String medidas;
 
     @Column(nullable = false, precision = 7)
@@ -36,6 +33,10 @@ public class Producto {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_producto", nullable = false)
     private TipoProducto tipoProducto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_material", nullable = false)
+    private Material material;
 
 
     public Long getIdProducto() {
@@ -60,14 +61,6 @@ public class Producto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(String material) {
-        this.material = material;
     }
 
     public String getMedidas() {
@@ -108,5 +101,13 @@ public class Producto {
 
     public void setTipoProducto(TipoProducto tipoProducto) {
         this.tipoProducto = tipoProducto;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 }
