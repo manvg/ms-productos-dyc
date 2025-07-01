@@ -1,8 +1,10 @@
 package com.microservicio.ms_productos_dyc.service;
 
 import com.microservicio.ms_productos_dyc.model.dto.ProductoDTO;
+import com.microservicio.ms_productos_dyc.model.entity.Material;
 import com.microservicio.ms_productos_dyc.model.entity.Producto;
 import com.microservicio.ms_productos_dyc.model.entity.TipoProducto;
+import com.microservicio.ms_productos_dyc.repository.MaterialRepository;
 import com.microservicio.ms_productos_dyc.repository.ProductoRepository;
 import com.microservicio.ms_productos_dyc.repository.TipoProductoRepository;
 import com.microservicio.ms_productos_dyc.utilities.ProductoMapper;
@@ -23,6 +25,9 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Autowired
     private TipoProductoRepository tipoProductoRepository;
+
+    @Autowired
+    private MaterialRepository materialRepository;
 
     //---------MÉTODOS GET---------//
     @Override
@@ -53,9 +58,20 @@ public class ProductoServiceImpl implements ProductoService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tipo de producto está inactivo: " + idTipo);
         }
 
+        Material material = materialRepository.findById(dto.getIdMaterial())
+            .orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Material no existe: " + dto.getIdMaterial()));
+        if (material.getActivo() != 1) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "Material inactivo: " + dto.getIdMaterial()
+            );
+        }
+
         //Convertimos y guardamos
         Producto producto = ProductoMapper.toEntity(dto);
         producto.setTipoProducto(tipo); //nos aseguramos de forzar la entidad cargada
+        producto.setMaterial(material);
         Producto saved = productoRepository.save(producto);
         return ProductoMapper.toDTO(saved);
     }
@@ -80,14 +96,27 @@ public class ProductoServiceImpl implements ProductoService {
             );
         }
 
+        // Validamos el material
+        Material material = materialRepository.findById(dto.getIdMaterial())
+            .orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Material no existe: " + dto.getIdMaterial()
+            ));
+        if (material.getActivo() != 1) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Material está inactivo: " + dto.getIdMaterial()
+            );
+        }
+
         existente.setNombre(dto.getNombre());
         existente.setDescripcion(dto.getDescripcion());
-        existente.setMaterial(dto.getMaterial());
         existente.setMedidas(dto.getMedidas());
         existente.setPrecio(dto.getPrecio());
         existente.setUrlImagen(dto.getUrlImagen());
         existente.setActivo(dto.getActivo());
         existente.setTipoProducto(tipo);
+        existente.setMaterial(material);
 
         Producto updated = productoRepository.save(existente);
         return ProductoMapper.toDTO(updated);
