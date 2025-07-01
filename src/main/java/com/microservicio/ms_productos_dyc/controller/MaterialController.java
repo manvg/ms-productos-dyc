@@ -37,6 +37,11 @@ public class MaterialController {
         return ResponseEntity.ok(materialService.obtenerTodos());
     }
 
+    @GetMapping("/sans")
+    public ResponseEntity<ResponseModelDTO> sans() {
+        return ResponseEntity.ok(new ResponseModelDTO(true, "Te pica la patita"));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<MaterialDTO> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(materialService.obtenerPorId(id));
