@@ -48,10 +48,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Docker image
         run: |
-          docker build -t mydockerhubuser/ms-productos-dyc:${{ github.sha }} .
+          docker build -t jayirong/ms-productos-dyc:${{ github.sha }} .
       - name: Push Docker image
         run: |
-          docker push mydockerhubuser/ms-productos-dyc:${{ github.sha }}
+          docker push jayirong/ms-productos-dyc:${{ github.sha }}
 
   deploy:
     name: 🚀 Deploy to EC2
@@ -65,11 +65,11 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull mydockerhubuser/ms-productos-dyc:${{ github.sha }}
+            docker pull jayirong/ms-productos-dyc:${{ github.sha }}
             docker stop ms-productos-dyc || true
             docker rm ms-productos-dyc || true
             docker run -d \
               --name ms-productos-dyc \
               --restart unless-stopped \
               -p 8080:8080 \
-              mydockerhubuser/ms-productos-dyc:${{ github.sha }}
+              jayirong/ms-productos-dyc:${{ github.sha }}
