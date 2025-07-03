@@ -39,7 +39,7 @@ public class MaterialController {
 
     @GetMapping("/sans")
     public ResponseEntity<ResponseModelDTO> sans() {
-        return ResponseEntity.ok(new ResponseModelDTO(true, "Te pica la patita"));
+        return ResponseEntity.ok(new ResponseModelDTO(true, "Te pica la patita.com"));
     }
 
     @GetMapping("/{id}")
