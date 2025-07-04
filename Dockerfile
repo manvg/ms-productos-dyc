@@ -9,11 +9,15 @@ RUN chmod +x mvnw \
  && ./mvnw dependency:go-offline -B
 
 COPY src/ src/
-RUN ./mvnw clean package -DskipTests -build
+RUN ./mvnw clean package -DskipTests -B
 
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
+
+COPY Wallet_MJVBC32FWKXL3WN2 /app/Wallet_MJVBC32FWKXL3WN2
+
+ENV TNS_ADMIN=app/Wallet_MJVBC32FWKXL3WN2
 
 COPY --from=build /app/target/ms_productos_dyc-0.0.1-SNAPSHOT.jar app.jar
 
