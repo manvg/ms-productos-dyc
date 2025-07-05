@@ -1,6 +1,8 @@
 package com.microservicio.ms_productos_dyc.utilities;
 
 import com.microservicio.ms_productos_dyc.model.dto.ProductoDTO;
+import com.microservicio.ms_productos_dyc.model.dto.ProductoDetalleDTO;
+import com.microservicio.ms_productos_dyc.model.dto.ProductoSumarioDTO;
 import com.microservicio.ms_productos_dyc.model.entity.Material;
 import com.microservicio.ms_productos_dyc.model.entity.Producto;
 import com.microservicio.ms_productos_dyc.model.entity.TipoProducto;
@@ -57,5 +59,30 @@ public class ProductoMapper {
         }
 
         return p;
+    }
+
+    //pSumario
+    public static ProductoSumarioDTO toSumarioDTO(Producto p) {
+        if (p == null) return null;
+        return new ProductoSumarioDTO(
+            p.getIdProducto(),
+            p.getNombre(),
+            p.getPrecio(),
+            p.getUrlImagen()
+        );
+    }
+
+    public static ProductoDetalleDTO toDetalleDTO(Producto p) {
+        if (p == null) return null;
+        ProductoDetalleDTO dto = new ProductoDetalleDTO();
+        dto.setIdProducto(p.getIdProducto());
+        dto.setNombre(p.getNombre());
+        dto.setPrecio(p.getPrecio());
+        dto.setUrlImagen(p.getUrlImagen());
+        dto.setDescripcion(p.getDescripcion());
+        dto.setMedidas(p.getMedidas());
+        String nombreMat = (p.getMaterial() != null) ? p.getMaterial().getNombre() : null;
+        dto.setNombreMaterial(nombreMat);
+        return dto;
     }
 }
