@@ -1,6 +1,8 @@
 package com.microservicio.ms_productos_dyc.service;
 
 import com.microservicio.ms_productos_dyc.model.dto.ProductoDTO;
+import com.microservicio.ms_productos_dyc.model.dto.ProductoDetalleDTO;
+import com.microservicio.ms_productos_dyc.model.dto.ProductoSumarioDTO;
 import com.microservicio.ms_productos_dyc.model.entity.Material;
 import com.microservicio.ms_productos_dyc.model.entity.Producto;
 import com.microservicio.ms_productos_dyc.model.entity.TipoProducto;
@@ -134,5 +136,24 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     public void eliminar(Long id) {
         productoRepository.deleteById(id);
+    }
+
+    //---------MÉTODOS PARA EXPOSITOR---------//
+    @Override
+    public List<ProductoSumarioDTO> listarSumario() {
+        return productoRepository.findAll()
+            .stream()
+            .map(ProductoMapper::toSumarioDTO)
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductoDetalleDTO obtenerDetalle(Long id) {
+        Producto p = productoRepository.findByIdWithTipoYMaterial(id)
+            .orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "Producto no encontrado con ID: " + id
+            ));
+        return ProductoMapper.toDetalleDTO(p);
     }
 }

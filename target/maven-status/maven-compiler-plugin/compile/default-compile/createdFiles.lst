@@ -12,6 +12,8 @@ com\microservicio\ms_productos_dyc\model\entity\TipoProducto.class
 com\microservicio\ms_productos_dyc\service\TipoProductoService\TipoProductoService.class
 com\microservicio\ms_productos_dyc\model\dto\TipoProductoDTO.class
 com\microservicio\ms_productos_dyc\repository\MaterialRepository.class
+com\microservicio\ms_productos_dyc\model\dto\ProductoSumarioDTO.class
+com\microservicio\ms_productos_dyc\model\dto\ProductoDetalleDTO.class
 com\microservicio\ms_productos_dyc\repository\TipoProductoRepository.class
 com\microservicio\ms_productos_dyc\model\dto\ResponseModelDTO.class
 com\microservicio\ms_productos_dyc\service\MaterialSerice\MaterialServiceImpl.class
@@ -19,6 +21,7 @@ com\microservicio\ms_productos_dyc\model\entity\Producto.class
 com\microservicio\ms_productos_dyc\utilities\ProductoMapper.class
 com\microservicio\ms_productos_dyc\controller\ProductoController.class
 com\microservicio\ms_productos_dyc\controller\TipoProductoController.class
+com\microservicio\ms_productos_dyc\controller\ExpositorController.class
 com\microservicio\ms_productos_dyc\utilities\MaterialMapper.class
 com\microservicio\ms_productos_dyc\controller\MaterialController.class
 com\microservicio\ms_productos_dyc\service\TipoProductoService\TipoProductoServiceImpl.class
