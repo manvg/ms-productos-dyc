@@ -44,7 +44,10 @@ public class ProductoMapper {
         p.setMedidas(dto.getMedidas());
         p.setPrecio(dto.getPrecio());
         p.setUrlImagen(dto.getUrlImagen());
-        p.setActivo(dto.getActivo());
+        
+        if (dto.getActivo() != null) {
+            p.setActivo(dto.getActivo());
+        }
 
         if (dto.getIdTipoProducto() != null) {
             TipoProducto tipo = new TipoProducto();
