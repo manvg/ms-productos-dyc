@@ -15,6 +15,9 @@ public class TipoProductoDTO {
 
     @NotBlank(message = "El nombre no puede estar vacío")
     private String nombre;
+    
+    @NotBlank(message = "La URL de la imagen no puede estar vacía")
+    private String urlImagen;
 
     @Min(0)
     @Max(1)

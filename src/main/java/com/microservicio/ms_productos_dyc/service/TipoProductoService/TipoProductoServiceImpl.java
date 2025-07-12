@@ -19,14 +19,19 @@ public class TipoProductoServiceImpl implements TipoProductoService{
     @Override
     public List<TipoProductoDTO> obtenerTodos() {
         return tipoProductoRepository.findAll().stream()
-            .map(tp -> new TipoProductoDTO(tp.getIdTipoProducto(), tp.getNombre(), tp.getActivo()))
-            .collect(Collectors.toList());
+        .map(tp -> new TipoProductoDTO(
+            tp.getIdTipoProducto(),
+            tp.getNombre(),
+            tp.getUrlImagen(),
+            tp.getActivo()))
+        .collect(Collectors.toList());
     }
 
     @Override
     public TipoProductoDTO crear(TipoProductoDTO dto) {
         TipoProducto entity = new TipoProducto();
         entity.setNombre(dto.getNombre());
+        entity.setUrlImagen(dto.getUrlImagen());
         entity.setActivo(dto.getActivo() != null ? dto.getActivo() : 1);
         tipoProductoRepository.save(entity);
         dto.setIdTipoProducto(entity.getIdTipoProducto());
@@ -38,6 +43,7 @@ public class TipoProductoServiceImpl implements TipoProductoService{
         TipoProducto entity = tipoProductoRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Tipo de producto no encontrado"));
         entity.setNombre(dto.getNombre());
+        entity.setUrlImagen(dto.getUrlImagen());
         tipoProductoRepository.save(entity);
         return dto;
     }
@@ -52,9 +58,14 @@ public class TipoProductoServiceImpl implements TipoProductoService{
 
     @Override
     public TipoProductoDTO obtenerPorId(Long id) {
-        TipoProducto entity = tipoProductoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Tipo de producto no encontrado con ID: " + id));
-        return new TipoProductoDTO(entity.getIdTipoProducto(), entity.getNombre(), entity.getActivo());
+        TipoProducto tp = tipoProductoRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("No encontrado ID: " + id));
+        return new TipoProductoDTO(
+        tp.getIdTipoProducto(),
+        tp.getNombre(),
+        tp.getUrlImagen(),
+        tp.getActivo()
+        );
     }
 
 }

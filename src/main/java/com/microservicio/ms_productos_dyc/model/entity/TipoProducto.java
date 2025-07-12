@@ -14,6 +14,9 @@ public class TipoProducto {
     @Column(nullable = false, length = 50)
     private String nombre;
 
+    @Column(name = "url_imagen", length = 300)
+    private String urlImagen;
+
     @Column(nullable = false)
     private Integer activo = 1;
 
@@ -40,5 +43,13 @@ public class TipoProducto {
 
     public void setActivo(Integer activo) {
         this.activo = activo;
+    }
+
+    public String getUrlImagen() {
+        return urlImagen;
+    }
+
+    public void setUrlImagen(String urlImagen) {
+        this.urlImagen = urlImagen;
     }
 }

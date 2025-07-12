@@ -1,12 +1,15 @@
 package com.microservicio.ms_productos_dyc.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.microservicio.ms_productos_dyc.model.dto.ResponseModelDTO;
 import com.microservicio.ms_productos_dyc.model.dto.TipoProductoDTO;
@@ -36,15 +39,43 @@ public class TipoProductoController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseModelDTO> crear(@Valid @RequestBody TipoProductoDTO dto, BindingResult result) {
+    public ResponseEntity<ResponseModelDTO> crear(
+        @Valid @RequestBody TipoProductoDTO dto, BindingResult result) {
+
+        if (result.hasErrors()) {
+        throw new ResponseStatusException(
+            HttpStatus.BAD_REQUEST,
+            result.getFieldErrors()
+                .stream()
+                .map(e -> e.getField()+": "+e.getDefaultMessage())
+                .collect(Collectors.joining(", "))
+        );
+        }
         tipoProductoService.crear(dto);
-        return ResponseEntity.ok(new ResponseModelDTO(true, "Tipo de producto creado correctamente"));
+        return ResponseEntity.ok(
+        new ResponseModelDTO(true, "Tipo de producto creado correctamente")
+        );
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseModelDTO> actualizar(@PathVariable Long id, @RequestBody TipoProductoDTO dto) {
+    public ResponseEntity<ResponseModelDTO> actualizar(
+        @PathVariable Long id,
+        @Valid @RequestBody TipoProductoDTO dto,
+        BindingResult result) {
+
+        if (result.hasErrors()) {
+        throw new ResponseStatusException(
+            HttpStatus.BAD_REQUEST,
+            result.getFieldErrors()
+                .stream()
+                .map(e -> e.getField()+": "+e.getDefaultMessage())
+                .collect(Collectors.joining(", "))
+        );
+        }
         tipoProductoService.actualizar(id, dto);
-        return ResponseEntity.ok(new ResponseModelDTO(true, "TipoProducto actualizado correctamente"));
+        return ResponseEntity.ok(
+        new ResponseModelDTO(true, "Tipo de producto actualizado correctamente")
+        );
     }
 
     @PutMapping("/{id}/cambiar-estado")
