@@ -10,4 +10,5 @@ public interface TipoProductoService {
     TipoProductoDTO actualizar(Long id, TipoProductoDTO dto);
     void cambiarEstado(Long id, Integer activo);
     TipoProductoDTO obtenerPorId(Long id);
+    void eliminar(Long id);
 }
