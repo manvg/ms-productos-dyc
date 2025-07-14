@@ -68,4 +68,8 @@ public class TipoProductoServiceImpl implements TipoProductoService{
         );
     }
 
+    @Override
+    public void eliminar(Long id) {
+        tipoProductoRepository.deleteById(id);
+    }
 }

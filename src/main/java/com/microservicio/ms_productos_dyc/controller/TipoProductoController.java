@@ -17,6 +17,7 @@ import com.microservicio.ms_productos_dyc.service.TipoProductoService.TipoProduc
 
 import jakarta.validation.Valid;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -89,4 +90,9 @@ public class TipoProductoController {
         return ResponseEntity.ok(tipoProductoService.obtenerPorId(id));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseModelDTO> eliminar(@PathVariable Long id) {
+        tipoProductoService.eliminar(id);
+        return ResponseEntity.ok(new ResponseModelDTO(true, "Tipo producto eliminado correctamente"));
+    }
 }
