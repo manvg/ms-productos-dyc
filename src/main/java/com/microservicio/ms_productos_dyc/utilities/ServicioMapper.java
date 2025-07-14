@@ -20,7 +20,9 @@ public class ServicioMapper {
     public static Servicio toEntity(ServicioDTO dto) {
         if (dto == null) return null;
         Servicio s = new Servicio();
-        s.setIdServicio(dto.getIdServicio());
+        if (dto.getIdServicio() != null && dto.getIdServicio() > 0) {
+            s.setIdServicio(dto.getIdServicio());
+        }
         s.setNombre(dto.getNombre());
         s.setDescripcion(dto.getDescripcion());
         s.setPrecio(dto.getPrecio());
